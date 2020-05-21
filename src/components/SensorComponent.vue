@@ -2,7 +2,7 @@
   <v-card class="mx-auto">
     <v-card-text class="text--primary">
       <v-row justify="space-around">
-        <v-col cols="6" align-self="left" class="headline">
+        <v-col cols="6" class="headline">
           <div class="overline">Forecast 3h</div>
         </v-col>
         <v-col cols="6" class="text-right">
@@ -13,7 +13,7 @@
         </v-col>
       </v-row>
       <v-row justify="space-around">
-        <v-col cols="2" align-self="left" class="headline">
+        <v-col cols="2" class="headline">
           <div class="d-flex flex-column align-center">
             <v-icon large>{{forecastWeatherIcon}}</v-icon>
             <p class="mb-0 caption">{{forecastTemperature}}</p>
@@ -30,9 +30,9 @@
         </v-col>
       </v-row>
       <v-row justify="space-around">
-        <v-col cols="2" align-self="left" class="headline">
+        <v-col cols="2" class="headline">
           <div class="d-flex flex-column align-center">
-            <v-icon large>fa-tint</v-icon>
+            <v-icon large>{{forecastHumidityIcon}}</v-icon>
             <p class="mb-0 caption">{{forecastHumidity}}</p>
           </div>
         </v-col>
@@ -100,24 +100,37 @@ export default {
     },
     forecastWeatherIcon: function() {
       if (this.monitor == undefined) {
-        return "";
+        return "fa-question";
       }
-
       if (this.monitor.weather == undefined) {
-        return "";
+        return "fa-question";
       }
-
       if (this.monitor.weather.length > 0) {
         var weather = this.monitor.weather[0];
         switch (weather.label) {
+          case "Clear - clear sky":
+            return "fa-sun";
           case "Clouds - broken clouds":
+          case "Clouds - scattered clouds":
+          case "Clouds - overcast clouds":
             return "fa-cloud-sun";
           default:
-            return "fa-cloud-sun";
+            return "fa-question";
         }
       }
-
-      return "fa-cloud-sun";
+      return "fa-question";
+    },
+    forecastHumidityIcon: function() {
+      if (this.monitor == undefined) {
+        return "fa-question";
+      }
+      if (this.monitor.weather == undefined) {
+        return "fa-question";
+      }
+      if (this.monitor.weather.length > 0) {
+        return "fa-tint";
+      }
+      return "fa-question";
     },
     forecastHumidity: function() {
       if (this.monitor == undefined) {

@@ -4,18 +4,21 @@
       value="auto"
       v-on:click="updateValue({controlled:true,value:value?value.value:true})"
       v-bind:disabled="disabled"
+      v-bind:color="colorAuto"
     >
-      <v-icon>far fa-eye</v-icon>
+      <v-icon>{{iconEye}}</v-icon>
     </v-btn>
     <v-btn
       value="on"
       v-on:click="updateValue({controlled:false,value:true})"
       v-bind:disabled="disabled"
+      v-bind:color="colorOn"
     >On</v-btn>
     <v-btn
       value="off"
       v-on:click="updateValue({controlled:false,value:false})"
       v-bind:disabled="disabled"
+      v-bind:color="colorOff"
     >Off</v-btn>
   </v-btn-toggle>
 </template>
@@ -32,6 +35,21 @@ export default {
     }
   },
   computed: {
+    iconEye: function() {
+      if (this.disabled) {
+        return "fas fa-sync fa-spin"
+      }
+      return this.lightValue == "auto" ? "far fa-eye" : "far fa-eye-slash";
+    },
+    colorAuto: function() {
+      return this.lightValue == "auto" ? "highlight" : "";
+    },
+    colorOn: function() {
+      return this.lightValue == "on" ? "colorOn" : "";
+    },
+    colorOff: function() {
+      return this.lightValue == "off" ? "colorOff" : "";
+    },
     lightValue: function() {
       if (!this.value) {
         return "";

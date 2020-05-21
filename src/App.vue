@@ -3,10 +3,9 @@
     <v-app-bar app color="primary" dark>
       <v-btn text>
         <v-icon>fa-tv</v-icon>
-        <span class="ml-2">Tortoise Tool</span>
+        <span class="ml-2">Tortoise</span>
       </v-btn>
     </v-app-bar>
-
     <v-content>
       <v-container fluid>
         <v-row>
@@ -115,7 +114,6 @@ export default {
       var reloadAndLock =
         !this.monitor[lightId].controlled &&
         oldValue != this.monitor[lightId].value;
-
       if (reloadAndLock) {
         this.lightComponentDisabled = true;
         this.webcam.loading = true;
@@ -172,7 +170,7 @@ export default {
     graphModel: {
       resolution: 1,
       period: 0
-    }
+    },
   })
 };
 </script>

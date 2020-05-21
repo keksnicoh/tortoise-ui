@@ -4,7 +4,6 @@ const path = require('path');
 function resolveSrc(_path) {
   return path.join(__dirname, _path);
 }
-
 module.exports = {
   "transpileDependencies": [
     "vuetify"
@@ -25,10 +24,11 @@ module.exports = {
   devServer: {
     proxy: {
       "^/api": {
-        target: "http://vps-ea1b2f2f.vps.ovh.net:8081/",
+        target: process.env.TORTOISE_UI_PROXY_TARGET,
         changeOrigin: true,
-        logLevel: "debug",
+        logLevel: process.env.TORTOISE_UI_PROXY_LOG_LEVEL,
         pathRewrite: { "^/api": "/" },
+        auth: process.env.TORTOISE_UI_PROXY_AUTH
       }
     }
   }

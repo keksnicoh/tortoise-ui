@@ -25,7 +25,7 @@
       </v-row>
       <v-row>
         <v-col md="6" sm="12">
-          <TemperatureChartComponent v-bind:graph="graphTemperature" />
+          <TemperatureChartComponent v-bind:graph="graphTemperature" v-bind:temperatureConfiguration="temperatureConfiguration" />
         </v-col>
         <v-col md="6" sm="12">
           <HumidityChartComponent v-bind:graph="graphHumidity" />
@@ -81,6 +81,15 @@ export default {
       };
     }
   },
-  data: () => ({})
+  data: () => ({
+    temperatureConfiguration: {
+      emergencyLow: 11,
+      emergencyHigh: 37,
+      l1Low: 17,
+      l1High: 24,
+      l2Low: 20,
+      l2High: 34
+    }
+  })
 };
 </script>
